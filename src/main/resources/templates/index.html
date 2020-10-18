@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+   <head>
+      <title>AngularJS</title>
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular.js"></script>
+       
+      <script th:src="@{/main.js}"></script>
+      <link th:href="@{/main.css}" rel="stylesheet" />
+       
+      <head>
+   <body ng-app="HouseholdApplianceManagement" ng-controller="HouseholdApplianceController">
+      <h3>
+        Household Appliance Management
+      </h3>
+      <form ng-submit="submitHouseholdAppliance()">
+         <table border="0">
+            <input type="hidden" id="btnValue" name="btnValue" value="123" />
+            <tr>
+               <td>Serial Number:</td>
+               <td><input type="text" id="serialNumber" ng-model="householdApplianceForm.serialNumber"/></td>
+            </tr>
+            <tr>
+               <td>Brand:</td>
+               <td><input type="text" id="brand" ng-model="householdApplianceForm.brand" /></td>
+            </tr>
+            <tr>
+               <td>Model:</td>
+               <td><input type="text" id="model" ng-model="householdApplianceForm.model"/></td>
+            </tr>
+            <tr>
+               <td>Status:</td>
+               <td><input type="text" id="status" ng-model="householdApplianceForm.status"/></td>
+            </tr>
+             <tr>
+               <td>Date Bought:</td>
+               <td>
+                <input type="date"  id="dateBought" ng-model="householdApplianceForm.dateBought"/>
+               </td>
+            </tr>
+            <tr>
+               <td colspan="2">
+                  <input type="submit" value="create" id="myInput" class="create-button" ng-show="showName" />
+                  <input type="button" value="Search" ng-click="searchhouseholdAppliance()" class="search-button" />
+               </td>
+            </tr>
+         </table>
+      </form>
+      <br/>
+      <a class="create-button" ng-click="createHouseholdAppliance()">Create HouseholdAppliance</a>
+      <table border="1">
+         <tr>
+            <th>Serial Number</th>
+            <th>Brand</th>
+            <th>Model</th>
+            <th>Status</th>
+            <th>Date Bought1</th>
+            <th>Edit</th>
+            <th>Delete</th>
+         </tr>
+         <!-- $scope.HouseholdAppliances -->
+         <tr ng-repeat="householdAppliance in householdAppliances">
+            <td> {{ householdAppliance.serialNumber }}</td>
+            <td> {{ householdAppliance.brand }}</td>
+            <td> {{ householdAppliance.model }}</td>
+            <td >{{ householdAppliance.status }}</td>
+            <td >{{ householdAppliance.dateBought | date : "dd/MM/yyyy" }}</td>
+            <td>
+            <a ng-click="editHouseholdAppliance(householdAppliance)" class="edit-button">Edit</a>
+            </td>
+            <td>
+            <a ng-click="deletehouseholdAppliance(householdAppliance)" class="delete-button">Delete</a>
+            </td>
+         </tr>
+      </table>
+   </body>
+</html>
